@@ -2,13 +2,16 @@ package rechard.learn.test;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import rechard.learn.MyWebConfig;
-import rechard.learn.bean.lifecycle.LifeCycleBean;
+import rechard.learn.MQ2Configuration;
+import rechard.learn.MQConfiguration;
+import rechard.learn.mq.DeliveryJMSHandler;
 
 public class Test {
 
 	public static void main(String[] args) {
-		 AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MyWebConfig.class);
+		 AnnotationConfigApplicationContext ctx = 
+				 new AnnotationConfigApplicationContext(MQConfiguration.class,
+						 MQ2Configuration.class);
 		 /* TranslationService myService = ctx.getBean(TranslationService.class);
 		
 		String msg = myService.getMessage("maker.alert", new String[]{"ะกร๗"}, Locale.TAIWAN);
@@ -24,7 +27,10 @@ public class Test {
 		 String msg2 = myService.getMessage("maker.alert", new String[]{"xiaoming"}, null);
 		 System.out.println(msg2);*/
 		 
-		 LifeCycleBean lcb = (LifeCycleBean)ctx.getBean("lifeCycle");
+		 /*LifeCycleBean lcb = (LifeCycleBean)ctx.getBean("lifeCycle");*/
+		 DeliveryJMSHandler sender = (DeliveryJMSHandler)ctx.getBean(DeliveryJMSHandler.class);
+		 sender.send("234234", "3434", "343434", "33333");
+		 sender.send2("234234", "3434", "343434", "33333");
 	}
 
 }
