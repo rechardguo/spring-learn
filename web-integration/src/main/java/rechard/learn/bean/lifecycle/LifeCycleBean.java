@@ -9,7 +9,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-@Component("lifeCycle")
+
 public class LifeCycleBean implements InitializingBean ,DisposableBean ,BeanPostProcessor{
 
 	//It is recommended that you do not use the InitializingBean interface because it unnecessarily couples the code to Spring. 
