@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
-@ComponentScan(basePackages="rechard.learn.service")
+@ComponentScan(basePackages={"rechard.learn.service","rechard.learn.qualifier"})
 public class ServiceConfiguration {
 	@Bean
 	public ResourceBundleMessageSource messageSource(){
@@ -14,4 +14,7 @@ public class ServiceConfiguration {
 		messageSource.setBasenames("alert");
 		return messageSource;
 	}
+	
+	
+	
 }
