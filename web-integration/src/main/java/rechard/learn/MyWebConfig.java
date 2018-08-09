@@ -2,24 +2,26 @@ package rechard.learn;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.theme.ThemeChangeInterceptor;
+
+import rechard.learn.bean.transaction.MyInterceptor;
 
 @Configuration
-@EnableWebMvc
-@EnableAspectJAutoProxy
-@ComponentScan(basePackages="rechard.learn")
+@ComponentScan(basePackages="rechard.learn.controller")
 public class MyWebConfig extends WebMvcConfigurerAdapter {
 
 	
 	
-	/* @Override
+	 @Override
 	    public void addInterceptors(InterceptorRegistry registry) {
-	        registry.addInterceptor(new LocaleChangeInterceptor());
+	        registry.addInterceptor(new MyInterceptor()).addPathPatterns("/rechard/interceptor");
+		    registry.addInterceptor(new LocaleChangeInterceptor());
 	        registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
 	    }
-	 
+	/** 
 	 @Override
 	    public void configureViewResolvers(ViewResolverRegistry registry) {
 	        registry.enableContentNegotiation(new MappingJackson2JsonView());
