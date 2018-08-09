@@ -21,15 +21,5 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
 		    registry.addInterceptor(new LocaleChangeInterceptor());
 	        registry.addInterceptor(new ThemeChangeInterceptor()).addPathPatterns("/**").excludePathPatterns("/admin/**");
 	    }
-	/** 
-	 @Override
-	    public void configureViewResolvers(ViewResolverRegistry registry) {
-	        registry.enableContentNegotiation(new MappingJackson2JsonView());
-	        registry.jsp();
-	    }
-	 
-	 @Override
-	    public void addViewControllers(ViewControllerRegistry registry) {
-	        registry.addViewController("/").setViewName("home");
-	    }*/
+	
 }

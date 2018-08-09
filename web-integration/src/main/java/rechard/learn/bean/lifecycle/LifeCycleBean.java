@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Lazy
 public class LifeCycleBean implements InitializingBean ,DisposableBean ,BeanPostProcessor,BeanNameAware {
 
+
 	public LifeCycleBean(){
 		System.out.println("Constructor");
 	}
