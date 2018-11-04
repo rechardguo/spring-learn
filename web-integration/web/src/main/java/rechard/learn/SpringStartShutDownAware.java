@@ -1,4 +1,4 @@
-package lifecycle;
+package rechard.learn;
 
 import org.springframework.context.SmartLifecycle;
 

@@ -1,9 +1,10 @@
-package rechard.learn.bean.lifecycle;
+package rechard.learn.bean;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -58,7 +59,7 @@ public class LifeCycleBean implements InitializingBean ,DisposableBean ,BeanPost
 
 	@Override
 	public Object postProcessAfterInitialization(Object arg0, String arg1) throws BeansException {
-		System.out.println(arg0);
+		System.out.println("arg0:"+arg0);
 		System.out.println("BeanPostProcessor->postProcessAfterInitialization()");
 		System.out.println("-------------------------------------------------");
 		return arg0;

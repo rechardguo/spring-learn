@@ -1,4 +1,4 @@
-package rechard.learn;
+package rechard.learn.spring.webintegration.mq;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsOperations;
 import org.springframework.jms.core.JmsTemplate;
@@ -15,8 +16,8 @@ import com.ibm.msg.client.wmq.WMQConstants;
 
 // refer to https://github.com/lzp4ever/IBM_WebSphere_MQ_Spring_Boot_JMS
 @Configuration
-@ComponentScan(basePackages="rechard.learn.mq")
-@PropertySource("classpath:mq.properties")
+@ComponentScan(basePackages="rechard.learn.spring.webintegration.mq")
+@PropertySource("classpath:/mq.properties")
 public class MQConfiguration {
 	@Value("${delivery.spring.mq.host}")
 	private String host;
@@ -75,6 +76,11 @@ public class MQConfiguration {
 		messageSource.addBasenames("alert","messages");
 		return messageSource;
 	}*/
-	
+	@Bean
+	public ResourceBundleMessageSource messageSource(){
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasenames("alert");
+		return messageSource;
+	}
 
 }

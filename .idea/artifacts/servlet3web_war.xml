@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="servlet3web:war">
-    <output-path>$PROJECT_DIR$/web-servlet3-scaffold/target</output-path>
-    <root id="archive" name="servlet3web.war">
-      <element id="artifact" artifact-name="servlet3web:war exploded" />
-    </root>
-  </artifact>
-</component>

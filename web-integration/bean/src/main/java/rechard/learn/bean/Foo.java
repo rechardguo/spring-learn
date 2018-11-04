@@ -1,3 +1,5 @@
+package rechard.learn.bean;
+
 public class Foo {
 
 	private String sr;

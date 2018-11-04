@@ -1,3 +1,5 @@
+package rechard.learn.spring.webintegration.mq;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

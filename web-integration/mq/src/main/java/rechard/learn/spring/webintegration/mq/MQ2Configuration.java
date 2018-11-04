@@ -1,17 +1,17 @@
-package rechard.learn;
+package rechard.learn.spring.webintegration.mq;
 
+import com.ibm.mq.jms.MQQueueConnectionFactory;
+import com.ibm.msg.client.wmq.WMQConstants;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jms.connection.CachingConnectionFactory;
 import org.springframework.jms.core.JmsOperations;
 import org.springframework.jms.core.JmsTemplate;
-
-import com.ibm.mq.jms.MQQueueConnectionFactory;
-import com.ibm.msg.client.wmq.WMQConstants;
 
 
 /**
@@ -25,8 +25,8 @@ REFRESH SECURITY TYPE(CONNAUTH)
 
 // refer to https://github.com/lzp4ever/IBM_WebSphere_MQ_Spring_Boot_JMS
 @Configuration
-@ComponentScan(basePackages="rechard.learn.mq")
-@PropertySource("classpath:mq.properties")
+@ComponentScan(basePackages="rechard.learn.spring.webintegration.mq")
+@PropertySource("classpath*:/mq.properties")
 public class MQ2Configuration {
 	@Value("${spring.mq.host}")
 	private String host;
@@ -73,6 +73,13 @@ public class MQ2Configuration {
 	    JmsTemplate jmsTemplate = new JmsTemplate(cachingConnectionFactory);
 	    jmsTemplate.setReceiveTimeout(receiveTimeout);
 	    return jmsTemplate;
+	}
+
+	@Bean
+	public ResourceBundleMessageSource messageSource(){
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasenames("alert");
+		return messageSource;
 	}
 
 }
