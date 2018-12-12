@@ -1,0 +1,4 @@
+1,Rechard,20
+2,James,30
+3,Cury,28
+4,Durant,26

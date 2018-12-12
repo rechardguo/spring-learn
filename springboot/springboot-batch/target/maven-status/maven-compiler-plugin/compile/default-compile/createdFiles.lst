@@ -1,0 +1,13 @@
+com\aci\ssm\batch\processor\RemindAlertProcessor.class
+com\aci\ssm\batch\config\DataSourceConfiguration.class
+rechard\learn\springbatch\InputStringReader.class
+rechard\learn\springbatch\sample\simple\Person.class
+com\aci\ssm\batch\entity\SSMRequest.class
+rechard\learn\springbatch\SpringBatchSimpleDemoConfiguration.class
+rechard\learn\springbatch\EndOfDayJobConfiguration.class
+rechard\learn\springbatch\sample\simple\PersonProcessor.class
+rechard\learn\springbatch\readDBBatchConfiguration.class
+com\aci\ssm\batch\config\RemindCheckerAlertConfiguration.class
+rechard\learn\springbatch\sample\simple\SimpleBatchConfiguration.class
+rechard\learn\springbatch\OutputStringPrintWriter.class
+rechard\learn\springbatch\sample\simple\SimpleDemo.class
