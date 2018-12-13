@@ -19,6 +19,7 @@ import org.springframework.core.io.InputStreamResource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 /**
  * 从文件里读取内容，文件里一行代表人的信息
@@ -54,13 +55,9 @@ public class SimpleBatchConfiguration {
     @Bean
     protected ItemReader<String> reader(){
         FlatFileItemReader reader=new FlatFileItemReader();
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(new File("E:\\code\\my_github_code\\spring-learn\\springboot-web-integration\\springboot-batch\\src\\main\\java\\rechard\\learn\\springbatch\\sample\\simple\\person.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        reader.setResource( new InputStreamResource(fis));
+        InputStream is = null;
+        is=ClassLoader.getSystemResourceAsStream("person.txt");
+        reader.setResource( new InputStreamResource(is));
         reader.setLineMapper((line,number)->{
             String[] str = line.split(",");
             Person p = new Person();

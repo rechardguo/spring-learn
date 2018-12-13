@@ -18,7 +18,7 @@ public class SimpleDemo {
         ctx.refresh();
         JobLauncher launcher = (JobLauncher)ctx.getBean("jobLauncher");
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
-        jobParametersBuilder.addLong("readCountPerTime",2L);
+        jobParametersBuilder.addLong("readCountPerTime",4L);
         JobParameters jobParameters = jobParametersBuilder.toJobParameters();
         try {
             launcher.run((Job)ctx.getBean("simpleJob"),jobParameters);
