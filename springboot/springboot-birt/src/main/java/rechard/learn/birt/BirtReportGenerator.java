@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.ByteArrayOutputStream;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,10 +19,12 @@ public class BirtReportGenerator {
     private IReportEngine birtEngine ;
 
     public ByteArrayOutputStream generate(ReportParameter rptParam) throws Exception{
+        //ByteArrayOutputStream 底层维护了一个byte[]，可以自动扩容
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IReportRunnable runnable = null;
+        URL url=BirtReportGenerator.class.getClassLoader().getResource("");
         runnable = birtEngine
-                .openReportDesign("E:\\code\\my_github_code\\spring-learn\\springboot\\springboot-schedual\\src\\main\\resources\\car.rptdesign");
+                .openReportDesign(url.getPath()+"report\\car.rptdesign");
         IRunAndRenderTask runAndRenderTask = birtEngine.createRunAndRenderTask(runnable);
         runAndRenderTask.setParameterValues(setParameters(runnable, rptParam.getParameter()));
 
@@ -44,13 +47,15 @@ public class BirtReportGenerator {
     protected HashMap<String, Object> setParameters(IReportRunnable report, Map<String,Object> m) throws Exception {
 
         HashMap<String, Object> parms = new HashMap<String, Object>();
-        IGetParameterDefinitionTask task = birtEngine.createGetParameterDefinitionTask(report);
 
+        IGetParameterDefinitionTask task = birtEngine.createGetParameterDefinitionTask(report);
+        //拿到birt里所有的parameter定义
         Collection<IParameterDefnBase> params = task.getParameterDefns(true);
         Iterator<IParameterDefnBase> iter = params.iterator();
         while (iter.hasNext()) {
             IParameterDefnBase param = (IParameterDefnBase) iter.next();
             Object val=m.get(param.getName());
+            //如果拿到birt的parameter有定义
             if (val!=null) {
                 parms.put(param.getName(),val);
             }
@@ -58,5 +63,4 @@ public class BirtReportGenerator {
         task.close();
         return parms;
     }
-
 }

@@ -22,16 +22,17 @@ public class CarService {
         car3.setYear("2002");
         car3.setMake("Ford");
         car3.setModel("Mustang GT");
-        List cars = Arrays.asList(  car1, car2, car3 ) ;
+        cars = Arrays.asList(  car1, car2, car3 ) ;
     }
 
     public List getAllCars (){
         return this.cars ;
     }
 
-    public List getAllCarsInYear(String year){
-        return this.cars.stream().filter(car->
+    public List getCarsByYear(String year){
+        List list=cars.stream().filter(car->
             car.getYear().equals(year)
         ).collect(Collectors.toList());
+        return list;
     }
 }

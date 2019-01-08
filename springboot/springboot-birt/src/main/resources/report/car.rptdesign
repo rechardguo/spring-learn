@@ -2,13 +2,8 @@
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
     <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
     <property name="units">in</property>
-    <method name="initialize"><![CDATA[//BIRT label report item onCreate Script
-importPackage(Packages.org.springframework.context);
-importPackage(Packages.org.springframework.web.context.support );
-//var sc = reportContext.getHttpServletRequest().getSession().getServletContext();
-//ApplicationContext 
+    <method name="initialize"><![CDATA[importPackage(Packages.org.springframework.context);
 spring=reportContext.getAppContext().get("spring");
-//spring = WebApplicationContextUtils.getWebApplicationContext(sc);
 var carService=spring.getBean("carService");
 
 ]]></method>
@@ -16,17 +11,6 @@ var carService=spring.getBean("carService");
     <property name="bidiLayoutOrientation">ltr</property>
     <property name="imageDPI">96</property>
     <parameters>
-        <scalar-parameter name="reportkey" id="13">
-            <property name="valueType">static</property>
-            <property name="dataType">string</property>
-            <property name="distinct">true</property>
-            <list-property name="selectionList"/>
-            <property name="paramType">simple</property>
-            <property name="controlType">text-box</property>
-            <structure name="format">
-                <property name="category">Unformatted</property>
-            </structure>
-        </scalar-parameter>
         <scalar-parameter name="year" id="16">
             <property name="valueType">static</property>
             <property name="dataType">string</property>
@@ -100,9 +84,18 @@ var carService=spring.getBean("carService");
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
-            <method name="open"><![CDATA[var carrptDataService=spring.getBean("carReportDataService");
-listdata = carrptDataService.getCarsByYear(2000);
+            <method name="open"><![CDATA[var carService=spring.getBean("carService");
+listdata=carService.getCarsByYear(params["year"]);
 count=0;]]></method>
+            <method name="fetch"><![CDATA[if(listdata.size()>count){
+	car=listdata.get(count);
+	row.year=car.getYear();
+	row.model=car.getModel();
+	row.make=car.getMake();
+	count++;
+	return true;
+}
+return false;]]></method>
         </script-data-set>
     </data-sets>
     <page-setup>
@@ -116,13 +109,76 @@ count=0;]]></method>
         </simple-master-page>
     </page-setup>
     <body>
-        <label id="4">
-            <text-property name="text">ABC</text-property>
-        </label>
-        <text id="5">
-            <property name="contentType">auto</property>
-            <text-property name="content"><![CDATA[Hello world
-]]></text-property>
-        </text>
+        <table id="33">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">make</property>
+                    <text-property name="displayName">make</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["make"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">model</property>
+                    <text-property name="displayName">model</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["model"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <text-property name="displayName">year</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["year"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="52"/>
+            <column id="53"/>
+            <column id="54"/>
+            <header>
+                <row id="34">
+                    <cell id="35">
+                        <label id="36">
+                            <text-property name="text">make</text-property>
+                        </label>
+                    </cell>
+                    <cell id="37">
+                        <label id="38">
+                            <text-property name="text">model</text-property>
+                        </label>
+                    </cell>
+                    <cell id="39">
+                        <label id="40">
+                            <text-property name="text">year</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="41">
+                    <cell id="42">
+                        <data id="43">
+                            <property name="resultSetColumn">make</property>
+                        </data>
+                    </cell>
+                    <cell id="44">
+                        <data id="45">
+                            <property name="resultSetColumn">model</property>
+                        </data>
+                    </cell>
+                    <cell id="46">
+                        <data id="47">
+                            <property name="resultSetColumn">year</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="48">
+                    <cell id="49"/>
+                    <cell id="50"/>
+                    <cell id="51"/>
+                </row>
+            </footer>
+        </table>
     </body>
 </report>
