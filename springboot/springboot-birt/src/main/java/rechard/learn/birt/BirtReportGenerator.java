@@ -2,6 +2,7 @@ package rechard.learn.birt;
 
 import org.eclipse.birt.report.engine.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayOutputStream;
@@ -18,13 +19,19 @@ public class BirtReportGenerator {
     @Autowired
     private IReportEngine birtEngine ;
 
+    public static void main(String[] args) throws Exception {
+        ClassPathResource cpr=new ClassPathResource("report/car.rptdesign");
+        String path =cpr.getURL().getFile();
+        System.out.println(path);
+    }
+
     public ByteArrayOutputStream generate(ReportParameter rptParam) throws Exception{
         //ByteArrayOutputStream 底层维护了一个byte[]，可以自动扩容
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IReportRunnable runnable = null;
-        URL url=BirtReportGenerator.class.getClassLoader().getResource("");
+        ClassPathResource cpr=new ClassPathResource("report/car.rptdesign");
         runnable = birtEngine
-                .openReportDesign(url.getPath()+"report\\car.rptdesign");
+                .openReportDesign(cpr.getInputStream());
         IRunAndRenderTask runAndRenderTask = birtEngine.createRunAndRenderTask(runnable);
         runAndRenderTask.setParameterValues(setParameters(runnable, rptParam.getParameter()));
 
