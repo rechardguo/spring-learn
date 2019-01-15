@@ -31,3 +31,11 @@ http://127.0.0.1:9898/process
 - https://www.jianshu.com/p/fa3230ffb27c
 - 直接去掉@EnableSwagger2
 
+5.swagger url
+
+http://127.0.0.1:<port>/swagger-ui.html
+
+eg:
+
+http://127.0.0.1:9898/swagger-ui.html
+
