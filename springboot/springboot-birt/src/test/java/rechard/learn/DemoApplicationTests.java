@@ -26,7 +26,5 @@ public class DemoApplicationTests {
         this.mvc.perform(post("/report/car/year/2000")).andExpect(status().isOk())
                 .andExpect(content().string("Hello World"));
     }
-
-
 }
 

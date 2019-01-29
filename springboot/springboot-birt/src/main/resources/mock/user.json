@@ -1,0 +1,101 @@
+[
+    {
+        "userKy": 111111,
+        "fullName": "userS01",
+        "email": "34@1.com",
+        "mobile": "111",
+        "birthDay": "2018-05-23",
+        "userId": "S01",
+        "language": "English (UK)",
+        "companyName": "ONE company pte ltd",
+        "accounts":  [
+          {
+            "key": "136013",
+            "accountName": "userS01-account 1",
+            "accountNo": "userS01-001",
+            "ccy": "GBP",
+            "paymentType": 1
+          },
+          {
+            "key": "136014",
+            "accountName": "userS01-account 2",
+            "accountNo": "userS01-002",
+            "ccy": "USD",
+            "paymentType": 2
+          },
+          {
+            "key": "136015",
+            "accountName": "userS01-account 3",
+            "accountNo": "userS01-003",
+            "ccy": "GBP",
+            "paymentType": 3
+          }
+        ]
+      },
+    {
+      "userKy": 111112,
+      "fullName": "userS02",
+      "email": "34@1.com",
+      "mobile": "222",
+      "birthDay": "2018-05-23",
+      "userId": "S02",
+      "language": "English (UK)",
+      "companyName": "TWO company pte ltd",
+      "accounts":  [
+        {
+          "key": "136013",
+          "accountName": "userS02-account 1",
+          "accountNo": "userS02-001",
+          "ccy": "GBP",
+          "paymentType": 1
+        },
+        {
+          "key": "136014",
+          "accountName": "userS02-account 2",
+          "accountNo": "userS02-002",
+          "ccy": "USD",
+          "paymentType": 2
+        },
+        {
+          "key": "136015",
+          "accountName": "userS02-account 3",
+          "accountNo": "userS03-003",
+          "ccy": "GBP",
+          "paymentType": 3
+        }
+      ]
+    },
+    {
+      "userKy": 111113,
+      "fullName": "userS03",
+      "email": "34@1.com",
+      "mobile": "333",
+      "birthDay": "2018-05-23",
+      "userId": "S03",
+      "language": "English (UK)",
+      "companyName": "THREE company pte ltd",
+      "accounts":  [
+        {
+          "key": "136013",
+          "accountName": "userS03-account 1",
+          "accountNo": "userS03-001",
+          "ccy": "GBP",
+          "paymentType": 1
+        },
+        {
+          "key": "136014",
+          "accountName": "userS03-account 2",
+          "accountNo": "userS03-002",
+          "ccy": "USD",
+          "paymentType": 2
+        },
+        {
+          "key": "136015",
+          "accountName": "userS03-account 3",
+          "accountNo": "userS03-003",
+          "ccy": "GBP",
+          "paymentType": 3
+        }
+      ]
+    }
+  ]

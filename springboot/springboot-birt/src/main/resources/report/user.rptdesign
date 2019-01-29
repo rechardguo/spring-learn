@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201806261756</property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[var spring=reportContext.getAppContext().get("spring");
+var userService=spring.getBean("userReportDataService");
+userList=userService.getUsers();
+]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <script-data-source name="userDataSource" id="54"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="userAccount" id="55">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">key</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">accountName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">accountNo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ccy</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">paymentType</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">userKy</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">key</property>
+                </structure>
+                <structure>
+                    <property name="columnName">accountName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">accountNo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ccy</property>
+                </structure>
+                <structure>
+                    <property name="columnName">paymentType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">userKy</property>
+                </structure>
+            </list-property>
+            <list-property name="filter"/>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">key</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">accountName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">accountNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ccy</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">paymentType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">userKy</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">userDataSource</property>
+            <method name="open"><![CDATA[importPackage(Packages.java.util)
+acctArrList = new ArrayList();
+
+for(var i=0;i<userList.size();i++) {
+ u=userList.get(i);
+ var accts=u.getAccounts();
+ if(accts!=null){
+  j=0;
+  while(j<accts.size()){
+    acct=accts.get(j);
+    acct.setUserKy(u.getUserKy());
+    acctArrList.add(acct);
+    j++;
+  }
+ }
+}
+count=0;]]></method>
+            <method name="fetch"><![CDATA[importPackage(Packages.rechard.learn.data);
+if(acctArrList.size()>count) {
+   acct=acctArrList.get(count);
+   row.accountName=acct.getAccountName();
+   row.accountNo=acct.getAccountNo();
+   row.ccy=acct.getCcy();
+   row.key=acct.getKey();
+   row.paymentType=acct.getPaymentType();
+   row.userKy=acct.getUserKy();
+   count++;
+   return true;
+}
+return false;]]></method>
+        </script-data-set>
+        <script-data-set name="users" id="56">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">userKy</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">fullName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">email</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">mobile</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">birthDay</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">userId</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">language</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">companyName</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">userKy</property>
+                </structure>
+                <structure>
+                    <property name="columnName">fullName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">email</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mobile</property>
+                </structure>
+                <structure>
+                    <property name="columnName">birthDay</property>
+                </structure>
+                <structure>
+                    <property name="columnName">userId</property>
+                </structure>
+                <structure>
+                    <property name="columnName">language</property>
+                </structure>
+                <structure>
+                    <property name="columnName">companyName</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">userKy</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">fullName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">email</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">mobile</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">birthDay</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">userId</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">language</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">companyName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">userDataSource</property>
+            <method name="open"><![CDATA[count=0;]]></method>
+            <method name="fetch"><![CDATA[if(userList.size()>count) {
+ user=userList.get(count);
+ row.userId=user.getUserId();
+ row.fullName=user.getFullName();
+ row.mobile=user.getMobile();
+ row.language=user.getLanguage(); 
+ row.email=user.getEmail();   
+ row.companyName=user.getCompanyName();
+ row.birthDay=user.getBirthDay();
+ row.userKy=user.getUserKy();
+ count++;
+ return true;
+}
+return false;]]></method>
+        </script-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="22">
+            <column id="23"/>
+            <row id="26">
+                <cell id="27">
+                    <table id="108">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="dataSet">users</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">fullName</property>
+                                <text-property name="displayName">fullName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["fullName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">userId</property>
+                                <text-property name="displayName">userId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["userId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">no</property>
+                                <expression name="expression" type="javascript">row.__rownum+1</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <column id="127"/>
+                        <column id="122"/>
+                        <column id="123"/>
+                        <header>
+                            <row id="109">
+                                <cell id="124">
+                                    <label id="128">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">No</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="110">
+                                    <label id="111">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">fullName</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="112">
+                                    <label id="113">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">userId</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="114">
+                                <cell id="125">
+                                    <data id="356">
+                                        <property name="resultSetColumn">no</property>
+                                    </data>
+                                </cell>
+                                <cell id="115">
+                                    <data id="116">
+                                        <property name="resultSetColumn">fullName</property>
+                                    </data>
+                                </cell>
+                                <cell id="117">
+                                    <data id="118">
+                                        <property name="resultSetColumn">userId</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="119">
+                                <cell id="126"/>
+                                <cell id="120"/>
+                                <cell id="121"/>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+            <row id="30">
+                <cell id="31">
+                    <table id="62">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="dataSet">users</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">fullName</property>
+                                <text-property name="displayName">fullName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["fullName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">email</property>
+                                <text-property name="displayName">email</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["email"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mobile</property>
+                                <text-property name="displayName">mobile</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mobile"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">birthDay</property>
+                                <text-property name="displayName">birthDay</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["birthDay"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
+                            <structure>
+                                <property name="name">userId</property>
+                                <text-property name="displayName">userId</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["userId"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">language</property>
+                                <text-property name="displayName">language</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["language"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">companyName</property>
+                                <text-property name="displayName">companyName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["companyName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">userKy</property>
+                                <text-property name="displayName">userKy</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["userKy"]</expression>
+                                <property name="dataType">string</property>
+                                <property name="allowExport">true</property>
+                            </structure>
+                        </list-property>
+                        <column id="101"/>
+                        <column id="102"/>
+                        <column id="103"/>
+                        <column id="104"/>
+                        <column id="105"/>
+                        <column id="106"/>
+                        <column id="107"/>
+                        <header>
+                            <row id="63">
+                                <cell id="64">
+                                    <label id="65">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">fullName</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="66">
+                                    <label id="67">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">email</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="68">
+                                    <label id="69">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">mobile</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="70">
+                                    <label id="71">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">birthDay</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="72">
+                                    <label id="73">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">userId</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="74">
+                                    <label id="75">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">language</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="76">
+                                    <label id="77">
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">companyName</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="78">
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">medium</property>
+                                <cell id="79">
+                                    <data id="80">
+                                        <property name="resultSetColumn">fullName</property>
+                                    </data>
+                                </cell>
+                                <cell id="81">
+                                    <data id="82">
+                                        <property name="resultSetColumn">email</property>
+                                    </data>
+                                </cell>
+                                <cell id="83">
+                                    <data id="84">
+                                        <property name="resultSetColumn">mobile</property>
+                                    </data>
+                                </cell>
+                                <cell id="85">
+                                    <data id="86">
+                                        <property name="resultSetColumn">birthDay</property>
+                                    </data>
+                                </cell>
+                                <cell id="87">
+                                    <data id="88">
+                                        <property name="resultSetColumn">userId</property>
+                                    </data>
+                                </cell>
+                                <cell id="89">
+                                    <data id="90">
+                                        <property name="resultSetColumn">language</property>
+                                    </data>
+                                </cell>
+                                <cell id="91">
+                                    <data id="92">
+                                        <property name="resultSetColumn">companyName</property>
+                                    </data>
+                                </cell>
+                            </row>
+                            <row id="129">
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">medium</property>
+                                <cell id="130">
+                                    <property name="colSpan">7</property>
+                                    <property name="rowSpan">1</property>
+                                </cell>
+                            </row>
+                            <row id="145">
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">medium</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="height">1.8645833333333333in</property>
+                                <cell id="146">
+                                    <property name="colSpan">7</property>
+                                    <property name="rowSpan">1</property>
+                                    <grid id="153">
+                                        <property name="height">2.03125in</property>
+                                        <column id="154"/>
+                                        <column id="155"/>
+                                        <row id="157">
+                                            <property name="height">0.625in</property>
+                                            <cell id="158">
+                                                <label id="169">
+                                                    <text-property name="text">Payment Account</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="159">
+                                                <table id="239">
+                                                    <property name="dataSet">userAccount</property>
+                                                    <list-property name="boundDataColumns">
+                                                        <structure>
+                                                            <property name="name">key</property>
+                                                            <text-property name="displayName">key</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["key"]</expression>
+                                                            <property name="dataType">integer</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">accountName</property>
+                                                            <text-property name="displayName">accountName</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountName"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">accountNo</property>
+                                                            <text-property name="displayName">accountNo</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountNo"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">ccy</property>
+                                                            <text-property name="displayName">ccy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["ccy"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">paymentType</property>
+                                                            <text-property name="displayName">paymentType</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["paymentType"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">userKy</property>
+                                                            <text-property name="displayName">userKy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["userKy"]</expression>
+                                                            <property name="dataType">integer</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <list-property name="filter">
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["paymentType"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>1</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">true</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["userKy"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>row._outer["userKy"]</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">true</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <column id="274"/>
+                                                    <column id="275"/>
+                                                    <header>
+                                                        <row id="240">
+                                                            <cell id="243">
+                                                                <label id="244">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountName</text-property>
+                                                                </label>
+                                                            </cell>
+                                                            <cell id="245">
+                                                                <label id="246">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountNo</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                    </header>
+                                                    <detail>
+                                                        <row id="253">
+                                                            <cell id="256">
+                                                                <data id="257">
+                                                                    <property name="resultSetColumn">accountName</property>
+                                                                </data>
+                                                            </cell>
+                                                            <cell id="258">
+                                                                <data id="259">
+                                                                    <property name="resultSetColumn">accountNo</property>
+                                                                </data>
+                                                            </cell>
+                                                        </row>
+                                                    </detail>
+                                                </table>
+                                            </cell>
+                                        </row>
+                                        <row id="161">
+                                            <property name="height">0.5625in</property>
+                                            <cell id="162">
+                                                <label id="170">
+                                                    <text-property name="text">Payroll Account</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="163">
+                                                <table id="279">
+                                                    <property name="dataSet">userAccount</property>
+                                                    <list-property name="boundDataColumns">
+                                                        <structure>
+                                                            <property name="name">accountName</property>
+                                                            <text-property name="displayName">accountName</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountName"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">accountNo</property>
+                                                            <text-property name="displayName">accountNo</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountNo"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">ccy</property>
+                                                            <text-property name="displayName">ccy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["ccy"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">paymentType</property>
+                                                            <text-property name="displayName">paymentType</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["paymentType"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">userKy</property>
+                                                            <text-property name="displayName">userKy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["userKy"]</expression>
+                                                            <property name="dataType">integer</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <list-property name="filter">
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["paymentType"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>2</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">true</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["userKy"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>row._outer["userKy"]</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">true</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <column id="308"/>
+                                                    <column id="309"/>
+                                                    <header>
+                                                        <row id="280">
+                                                            <cell id="281">
+                                                                <label id="282">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountName</text-property>
+                                                                </label>
+                                                            </cell>
+                                                            <cell id="283">
+                                                                <label id="284">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountNo</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                    </header>
+                                                    <detail>
+                                                        <row id="291">
+                                                            <cell id="292">
+                                                                <data id="293">
+                                                                    <property name="resultSetColumn">accountName</property>
+                                                                </data>
+                                                            </cell>
+                                                            <cell id="294">
+                                                                <data id="295">
+                                                                    <property name="resultSetColumn">accountNo</property>
+                                                                </data>
+                                                            </cell>
+                                                        </row>
+                                                    </detail>
+                                                </table>
+                                            </cell>
+                                        </row>
+                                        <row id="165">
+                                            <cell id="166">
+                                                <label id="171">
+                                                    <text-property name="text">Fix Deposite Account</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="167">
+                                                <table id="313">
+                                                    <property name="dataSet">userAccount</property>
+                                                    <list-property name="boundDataColumns">
+                                                        <structure>
+                                                            <property name="name">accountName</property>
+                                                            <text-property name="displayName">accountName</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountName"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">accountNo</property>
+                                                            <text-property name="displayName">accountNo</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["accountNo"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">ccy</property>
+                                                            <text-property name="displayName">ccy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["ccy"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">paymentType</property>
+                                                            <text-property name="displayName">paymentType</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["paymentType"]</expression>
+                                                            <property name="dataType">string</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="name">userKy</property>
+                                                            <text-property name="displayName">userKy</text-property>
+                                                            <expression name="expression" type="javascript">dataSetRow["userKy"]</expression>
+                                                            <property name="dataType">integer</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <list-property name="filter">
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["paymentType"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>3</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">false</property>
+                                                        </structure>
+                                                        <structure>
+                                                            <property name="operator">eq</property>
+                                                            <expression name="expr" type="javascript">row["userKy"]</expression>
+                                                            <simple-property-list name="value1">
+                                                                <value>row._outer["userKy"]</value>
+                                                            </simple-property-list>
+                                                            <property name="updateAggregation">true</property>
+                                                        </structure>
+                                                    </list-property>
+                                                    <column id="342"/>
+                                                    <column id="343"/>
+                                                    <header>
+                                                        <row id="314">
+                                                            <cell id="315">
+                                                                <label id="316">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountName</text-property>
+                                                                </label>
+                                                            </cell>
+                                                            <cell id="317">
+                                                                <label id="318">
+                                                                    <property name="fontWeight">bold</property>
+                                                                    <property name="textAlign">left</property>
+                                                                    <text-property name="text">accountNo</text-property>
+                                                                </label>
+                                                            </cell>
+                                                        </row>
+                                                    </header>
+                                                    <detail>
+                                                        <row id="325">
+                                                            <cell id="326">
+                                                                <data id="327">
+                                                                    <property name="resultSetColumn">accountName</property>
+                                                                </data>
+                                                            </cell>
+                                                            <cell id="328">
+                                                                <data id="329">
+                                                                    <property name="resultSetColumn">accountNo</property>
+                                                                </data>
+                                                            </cell>
+                                                        </row>
+                                                    </detail>
+                                                </table>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

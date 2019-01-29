@@ -24,6 +24,10 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
         <!-- BIRT dependencies -->
 		<dependency>
 			<groupId>org.eclipse.birt.runtime</groupId>

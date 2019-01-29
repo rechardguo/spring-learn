@@ -19,17 +19,12 @@ public class BirtReportGenerator {
     @Autowired
     private IReportEngine birtEngine ;
 
-    public static void main(String[] args) throws Exception {
-        ClassPathResource cpr=new ClassPathResource("report/car.rptdesign");
-        String path =cpr.getURL().getFile();
-        System.out.println(path);
-    }
 
     public ByteArrayOutputStream generate(ReportParameter rptParam) throws Exception{
         //ByteArrayOutputStream 底层维护了一个byte[]，可以自动扩容
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         IReportRunnable runnable = null;
-        ClassPathResource cpr=new ClassPathResource("report/car.rptdesign");
+        ClassPathResource cpr=new ClassPathResource("report/"+rptParam.getReportName()+".rptdesign");
         runnable = birtEngine
                 .openReportDesign(cpr.getInputStream());
         IRunAndRenderTask runAndRenderTask = birtEngine.createRunAndRenderTask(runnable);
