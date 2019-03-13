@@ -1,0 +1,18 @@
+pipeline {
+    agent { docker { image 'maven:3.3.3' } }
+      environment {
+         PATH = '/var/local/springboot-deploy'
+      }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+                sh 'cd ${env.PATH}'
+                sh 'mvn package -Dmaven.test.skip=true'
+                sh 'cd target'
+                sh 'java -jar simledemo-0.0.1-SNAPSHOT.jar'
+                sh 'start'
+            }
+        }
+    }
+}
