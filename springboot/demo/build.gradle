@@ -1,0 +1,38 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.7.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
+war{
+	baseName ="demo"    //war名称
+}
+
+dependencies {
+	//如果想在jboss里运行起来需要加入
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    //如果想在内嵌的tomcat里启动并且能解析jsp的话，需要加入，这2句不能同时加入
+	//compile('org.apache.tomcat.embed:tomcat-embed-jasper')
+	compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.8.7'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+}
